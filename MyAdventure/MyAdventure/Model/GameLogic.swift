@@ -13,11 +13,11 @@ struct GameLogic {
     // current text can be updated
     // this seems kind of janky but it's what I came up with for these purposes
     var consequenceMap: [String: String] = [
-        "Hire a private boat capatin" : "You hired a private boat capatain.",
-        "Hire a private fight pilot" : "You hired a private flight pilot",
-        "Take over control of the plane" : "You took over the plane",
-        "Read a book in the back" : "You decided to read a book in the back and fell asleep.",
-        "Sail the 7 seas" : "You sailed the seven seas and found the treaure!",
+        "Hire a private boat capatin" : "You hired a private boat captain.",
+        "Hire a private flight pilot" : "You hired a private flight pilot.",
+        "Take over control of the plane" : "You took over the plane. Within a few minutes, you see something miles away on the horizon, rising out of the ocean water...",
+        "Read a book in the back" : "You decided to read a book in the back of the plane and fell asleep.",
+        "Sail the seven seas" : "You sailed the seven seas and found the treaure!",
         "Jump onto the back of a whale" : "You jumped onto the back of a whale and explored the ocean."
     ]
     
@@ -25,11 +25,11 @@ struct GameLogic {
     var end_node = ChoiceNode("", "", nil, nil, true)
     
     // second level choices
-    lazy var choice2 = ChoiceNode("Sail the 7 seas", "Jump onto the back of a whale", end_node, end_node)
+    lazy var choice2 = ChoiceNode("Sail the seven seas", "Jump onto the back of a whale", end_node, end_node)
     lazy var choice3 = ChoiceNode("Take over control of the plane", "Read a book in the back", end_node, end_node)
     
     // first level choices
-    lazy var choice1 = ChoiceNode("Hire a private boat capatin", "Hire a private fight pilot", choice2, choice3)
+    lazy var choice1 = ChoiceNode("Hire a private boat capatin", "Hire a private flight pilot", choice2, choice3)
     
     // store the current text displayed on screen and the current choice being displayed
     var current_text: String
@@ -39,6 +39,8 @@ struct GameLogic {
         self.current_text = "You found the map of 'The Treasure on Pirate Island'"
         self.current_choice = self.choice1
     }
+    
+    
     
     mutating func update_game(_ action: String) {
         // progress to the next choice
@@ -56,6 +58,8 @@ struct GameLogic {
        
     }
     
+    
+    
     mutating func set_current_text(_ action: String) {
         if let text = consequenceMap[action] { // this is called optional binding, needed since the consequence map could return the wrong thing
             current_text = text
@@ -64,12 +68,28 @@ struct GameLogic {
         }
     }
     
+    
+    
     func get_current_text() -> String {
         return current_text
     }
     
-    func get_current_choice() -> ChoiceNode {
-        return current_choice
+    // rather than handling it like this, which requires ViewController to know the contents of a ChoiceNode
+    //func get_current_choice() -> ChoiceNode {
+    //    return current_choice
+    //}
+    
+    
+    
+    // handle each action separately
+    func get_left_choice() -> String {
+        return current_choice.leftChoice
+    }
+    
+    
+    
+    func get_right_choice() -> String {
+        return current_choice.rightChoice
     }
 
 }
