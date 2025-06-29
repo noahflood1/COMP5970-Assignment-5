@@ -75,6 +75,9 @@ class ViewController: UIViewController {
         rightChoiceButton.isHidden = false
         gameOverLabel.isHidden = true
         
+        styleButton(leftChoiceButton)
+        styleButton(rightChoiceButton)
+        
     }
     
     
@@ -99,5 +102,14 @@ class ViewController: UIViewController {
         
         updateUI()
     }
+    
+    // since buttons seem to be changing style when i set their text
+    func styleButton(_ button: UIButton) {
+        button.titleLabel?.font = UIFont(name: "Menlo-Bold", size: 10)
+        button.titleLabel?.textAlignment = .center
+        button.titleLabel?.numberOfLines = 0
+        button.setTitleColor(.systemBlue, for: .normal)
+    }
 }
 
+    

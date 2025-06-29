@@ -13,7 +13,7 @@ struct GameLogic {
     // current text can be updated
     // this seems kind of janky but it's what I came up with for these purposes
     var consequenceMap: [String: String] = [
-        "Hire a private boat capatin" : "You hired a private boat captain.",
+        "Hire a private boat captain" : "You hired a private boat captain.",
         "Hire a private flight pilot" : "You hired a private flight pilot.",
         "Take over control of the plane" : "You took over the plane. Within a few minutes, you see something miles away on the horizon, rising out of the ocean water...",
         "Read a book in the back" : "You decided to read a book in the back of the plane and fell asleep.",
@@ -29,7 +29,7 @@ struct GameLogic {
     lazy var choice3 = ChoiceNode("Take over control of the plane", "Read a book in the back", end_node, end_node)
     
     // first level choices
-    lazy var choice1 = ChoiceNode("Hire a private boat capatin", "Hire a private flight pilot", choice2, choice3)
+    lazy var choice1 = ChoiceNode("Hire a private boat captain", "Hire a private flight pilot", choice2, choice3)
     
     // store the current text displayed on screen and the current choice being displayed
     var current_text: String
